@@ -74,12 +74,13 @@
   <div class="container" id="landing">
     <h1>Get Your Free Guide</h1>
     <p>Sign up below to access instantly.</p>
-    <form action="https://n8n-wsis.vercel.app/webhook/leadmagnet" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <button type="submit">Get Instant Access</button>
-</form>
 
+    <!-- Added id="leadForm" -->
+    <form id="leadForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <button type="submit">Get Instant Access</button>
+    </form>
   </div>
 
   <div class="container thankyou" id="thankyou">
@@ -88,31 +89,35 @@
   </div>
 
   <script>
-    const form = document.getElementById("leadForm");
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("leadForm");
 
-      const formData = {
-        name: form.name.value,
-        email: form.email.value,
-      };
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-      // Replace with your n8n webhook URL
-      const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
+        const formData = {
+          name: form.name.value,
+          email: form.email.value,
+        };
 
-      try {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
+        // Replace with your n8n webhook URL
+        const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
 
-        // Show thank you message
-        document.getElementById("landing").style.display = "none";
-        document.getElementById("thankyou").style.display = "block";
-      } catch (err) {
-        alert("Something went wrong. Please try again.");
-      }
+        try {
+          await fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          // Show thank you message
+          document.getElementById("landing").style.display = "none";
+          document.getElementById("thankyou").style.display = "block";
+        } catch (err) {
+          alert("Something went wrong. Please try again.");
+          console.error(err);
+        }
+      });
     });
   </script>
 </body>
