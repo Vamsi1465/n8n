@@ -9,62 +9,42 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f9fafb;
-      color: #111;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-
     .container {
       max-width: 400px;
       width: 100%;
       background: #fff;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       text-align: center;
     }
-
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #444;
-      margin-bottom: 20px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
     input {
+      width: 100%;
       padding: 12px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
-
     button {
+      width: 100%;
       padding: 12px;
       border: none;
       border-radius: 6px;
       background: #2563eb;
-      color: #fff;
+      color: white;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
     }
-
     button:hover {
       background: #1e4ed8;
     }
-
     .thankyou {
       display: none;
     }
@@ -74,8 +54,6 @@
   <div class="container" id="landing">
     <h1>Get Your Free Guide</h1>
     <p>Sign up below to access instantly.</p>
-
-    <!-- Added id="leadForm" -->
     <form id="leadForm">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
@@ -86,31 +64,31 @@
   <div class="container thankyou" id="thankyou">
     <h1>✅ Thank You!</h1>
     <p>Your content will be delivered shortly.</p>
+    <a href="https://calendly.com/yourteam" target="_blank">Book a Call</a>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("leadForm");
 
-      form.addEventListener("submit", async function (e) {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const formData = {
           name: form.name.value,
-          email: form.email.value,
+          email: form.email.value
         };
 
-        // Replace with your n8n webhook URL
-        const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
-
         try {
+          const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
+
           await fetch(webhookUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData)
           });
 
-          // Show thank you message
+          // Show thank-you message
           document.getElementById("landing").style.display = "none";
           document.getElementById("thankyou").style.display = "block";
         } catch (err) {
