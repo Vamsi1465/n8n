@@ -1,0 +1,33 @@
+<form id="leadForm">
+  <input type="text" name="name" placeholder="Your Name" required />
+  <input type="email" name="email" placeholder="Your Email" required />
+  <button type="submit">Proceed</button>
+</form>
+
+<script>
+  const form = document.getElementById("leadForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: form.name.value,
+      email: form.email.value
+    };
+
+    try {
+      await fetch("https://funky-sole-fully.ngrok-free.app/webhook/55060103-b4da-4069-baa2-2a16d7027e3e", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      // Show Thank You
+      alert("✅ Thank you! We’ll be in touch.");
+    } catch (err) {
+      alert("⚠️ Something went wrong, please try again.");
+    }
+  });
+</script>
