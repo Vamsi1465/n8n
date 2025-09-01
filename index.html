@@ -74,11 +74,12 @@
   <div class="container" id="landing">
     <h1>Get Your Free Guide</h1>
     <p>Sign up below to access instantly.</p>
-    <form id="leadForm">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <button type="submit">Get Instant Access</button>
-    </form>
+    <form action="https://n8n-wsis.vercel.app/webhook/leadmagnet" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <button type="submit">Get Instant Access</button>
+</form>
+
   </div>
 
   <div class="container thankyou" id="thankyou">
