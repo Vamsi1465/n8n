@@ -4,51 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lead Magnet Landing Page</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      max-width: 400px;
-      width: 100%;
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      background: #2563eb;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #1e4ed8;
-    }
-    .thankyou {
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container" id="landing">
@@ -67,36 +23,7 @@
     <a href="https://calendly.com/yourteam" target="_blank">Book a Call</a>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("leadForm");
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const formData = {
-          name: form.name.value,
-          email: form.email.value
-        };
-
-        try {
-          const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
-
-          await fetch(webhookUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-          });
-
-          // Show thank-you message
-          document.getElementById("landing").style.display = "none";
-          document.getElementById("thankyou").style.display = "block";
-        } catch (err) {
-          alert("Something went wrong. Please try again.");
-          console.error(err);
-        }
-      });
-    });
-  </script>
+  <!-- Link to external JS -->
+  <script src="script.js"></script>
 </body>
 </html>
