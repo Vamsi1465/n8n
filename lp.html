@@ -1,33 +1,169 @@
-<form id="leadForm">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="email" placeholder="Your Email" required />
-  <button type="submit">Proceed</button>
-</form>
-
-<script>
-  const form = document.getElementById("leadForm");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = {
-      name: form.name.value,
-      email: form.email.value
-    };
-
-    try {
-      await fetch("https://funky-sole-fully.ngrok-free.app/webhook/55060103-b4da-4069-baa2-2a16d7027e3e", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-
-      // Show Thank You
-      alert("✅ Thank you! We’ll be in touch.");
-    } catch (err) {
-      alert("⚠️ Something went wrong, please try again.");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead Magnet Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #f9fafb, #eef2f7);
+      color: #111827;
     }
-  });
-</script>
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .image {
+      background: url("https://via.placeholder.com/600x800") center/cover no-repeat;
+    }
+
+    .content {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Thank you page */
+    .thankyou {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .thankyou h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .thankyou a {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .thankyou a:hover {
+      opacity: 0.9;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .image {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container" id="landing">
+      <div class="image"></div>
+      <div class="content">
+        <h1>Main Headline</h1>
+        <h2>Subheadline that reinforces the offer</h2>
+        <p>Keep it short and benefit-focused. Tell them exactly what they’ll get and why it matters.</p>
+
+        <form onsubmit="event.preventDefault(); showThankYou();">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <button type="submit">Get Instant Access</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="thankyou" class="thankyou">
+      <h1>✅ Thank you for signing up!</h1>
+      <p>Your content will be delivered shortly.</p>
+      <a href="https://calendly.com/yourteam" target="_blank">Book a Call</a>
+    </div>
+  </div>
+
+  <script>
+    function showThankYou() {
+      document.getElementById("landing").style.display = "none";
+      document.getElementById("thankyou").style.display = "block";
+    }
+  </script>
+</body>
+</html>
