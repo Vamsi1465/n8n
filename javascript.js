@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // 🔥 Replace with your exact n8n webhook URL
-      const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/Leadmagnet";
+      const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet";
 
       await fetch(webhookUrl, {
         method: "POST",
