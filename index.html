@@ -76,10 +76,14 @@
     <h1>Get Your Free Guide</h1>
     <p>Sign up below to access instantly.</p>
     <form id="leadForm">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <button type="submit">Get Instant Access</button>
-    </form>
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+
+  <!-- hidden field for lead magnet -->
+  <input type="hidden" name="lead_magnet" id="leadMagnetField" value="instagram">
+
+  <button type="submit">Get Instant Access</button>
+</form>
   </div>
 
   <div class="container thankyou" id="thankyou">
@@ -89,6 +93,11 @@
   </div>
 
   <script>
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
 document.getElementById("leadForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -96,22 +105,25 @@ document.getElementById("leadForm").addEventListener("submit", function(e) {
   const name = form.querySelector('input[name="name"]').value.trim();
   const email = form.querySelector('input[name="email"]').value.trim();
 
+  // get lead magnet from query string or fallback to default
+  const leadMagnet = getQueryParam("lead_magnet") || "default";
+
   if (!name || !email) {
     alert("Please enter both name and email.");
     return;
   }
 
-  const webhookUrl = "https://funky-sole-fully.ngrok-free.app/webhook-test/leadmagnet-test";
+  const webhookUrl = "https://n8n-byoqnxdr.us-east-1.clawcloudrun.com/webhook/076bc921-31ca-43e8-89a9-8c06b97ab066";
 
-  // Show thank-you instantly for better UX
+  // Show thank-you instantly
   document.getElementById("landing").style.display = "none";
   document.getElementById("thankyou").style.display = "block";
 
-  // Send data to n8n webhook in the background
+  // Send data to n8n webhook
   fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email })
+    body: JSON.stringify({ name, email, lead_magnet: leadMagnet })
   })
   .then(response => {
     if (!response.ok) {
